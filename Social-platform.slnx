@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Library/Library.csproj" Id="f30fc04c-09a8-4a39-b053-0a69efc755b3" />
+  <Project Path="Messenger/Messenger.csproj" Id="d731063d-e4ad-4430-bec2-e490ee6908c6" />
+  <Project Path="Viber/Viber.csproj" Id="6b24506a-ba2c-4840-8661-d647066eb79c" />
+</Solution>

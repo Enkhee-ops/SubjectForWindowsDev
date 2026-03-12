@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.chatFeild
+namespace Library.chatField
 {/// <summary>
     /// class for one on one chat.
 /// <summary>
-    public class OneOnOneChat : Chat
+    public class OneOnOneChat : Chatfeild
     {/// <summary>
      /// constructor for one-on -one
      /// <summary>
@@ -23,12 +23,7 @@ namespace Library.chatFeild
         /// <summary>
         /// preview of the last messege
         /// <summary>
-        public override string GetLastMessagePreview()
-        {
-            if (Messages.Count == 0) return "No messages yet";
-            var last = Messages[^1].Content;
-            return last.Length > 20 ? last.Substring(0, 17) + "..." : last;
-        }
+
         /// <summary>
         /// shows menu of on one chat
         /// <summary>

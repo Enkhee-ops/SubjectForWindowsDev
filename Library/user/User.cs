@@ -12,8 +12,8 @@ namespace Library.user
         public string UserId { get; } = Guid.NewGuid().ToString();
         public string DisplayName { get; set; }
         public byte Age { get; }
-        public string PhoneNumber { get; set; }  // Used more in Viber
-        public string ProfilePictureUrl { get; set; } = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=150";
+        public string PhoneNumber { get; set; } 
+        public string ProfilePictureUrl { get; set; } = "https://clipart-library.com/img1/939608.png";
         public string Password { get; private set; }
         public string Status { get; set; } = "Offline";  // e.g., "Active", "Last online: 2026-03-07 11:00 PM"
         public DateTime LastOnline { get; set; } = DateTime.UtcNow;

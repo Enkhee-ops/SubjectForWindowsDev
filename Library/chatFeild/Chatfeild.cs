@@ -12,17 +12,17 @@ using System.Linq;
 
 namespace Library.chatField
 /// <summary>
-/// Abstract base class for all chat types (1:1, group, self/notes).
+/// Abstract base class for all chatfeild types (1:1, group, self/notes).
 /// Provides common functionality: messaging, participants, read receipts, pinning.
 /// </summary>
 {
-    public abstract class Chat
+    public abstract class Chatfeild
     {
         // Core identification
         /// <summary>
         /// Unique identifier of this chat
         /// </summary>
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public string ChatId { get; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// Users currently in this conversation
@@ -48,7 +48,7 @@ namespace Library.chatField
         /// <summary>
         /// Last message each participant has seen
         /// </summary>
-        public Dictionary<User, Message> ReadReceipts { get; } = new Dictionary<User, Message>();
+        public Dictionary<User, Message> ReadReceipts { get; set; } = new Dictionary<User, Message>();
 
         /// <summary>
         /// Whether read receipts are enabled in this chat
@@ -58,13 +58,17 @@ namespace Library.chatField
         /// <summary>
         /// User's chosen notification preference for this chat
         /// </summary>
-        public string NotificationSetting { get; set; } = "All chats";
-
+        public enum NotificationSettingTypes { 
+            AllChats,
+            OnlyMentions,
+            NoNotifications
+        }
+        public NotificationSettingTypes NotificationSetting;
         // Dependency
         protected readonly IUserRepository userRepo;
 
         // Constructor
-        protected Chat(IUserRepository userRepo)
+        protected Chatfeild(IUserRepository userRepo)
         {
             this.userRepo = userRepo;
         }
@@ -88,9 +92,9 @@ namespace Library.chatField
             Messages.Add(msg);
             Console.WriteLine($"[Event] {type.ToUpper()} sent by {sender.DisplayName}: {content}");
 
-            // sender automatically sees their own message
+
             ReadReceipts[sender] = msg;
-        }
+        }//---------------------------------------------------------------------------------------------------------------------------------avj service bolgono
 
         /// <summary>
         /// Records that a user has seen up to this message
@@ -117,7 +121,12 @@ namespace Library.chatField
         /// Returns short preview text of the most recent message
         /// (implementation differs between 1:1, group, self-chat)
         /// </summary>
-        public abstract string GetLastMessagePreview();
+        public string GetLastMessagePreview()
+        {
+            if (Messages.Count == 0) return "No messages yet";
+            var last = Messages[Messages.Count - 1];
+            return $"{last.Sender.DisplayName}: {last.Content.Substring(0, Math.Min(20, last.Content.Length)) + "..."}";
+        }
         /// <summary>
         /// Displays interactive menu for this chat
         /// </summary>
@@ -179,7 +188,7 @@ namespace Library.chatField
                     Console.ReadLine();
                 }
             }
-        }
+        }//---------------------------------------------------------------------------------------service
 
         protected void ToggleAndShowReadReceipts()
         {
@@ -194,7 +203,7 @@ namespace Library.chatField
 
             Console.WriteLine("\nPress Enter to return...");
             Console.ReadLine();
-        }
+        }//---------------------------------------------------------------------------------------service
         protected void ShowInfo()
         {
             Console.Clear();
@@ -232,7 +241,7 @@ namespace Library.chatField
             }
             Console.WriteLine("\nPress Enter...");
             Console.ReadLine();
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
         // Shows all files in chat
         /// <summary>
         /// Shows all files in chat
@@ -255,7 +264,7 @@ namespace Library.chatField
             }
             Console.WriteLine("\nPress Enter...");
             Console.ReadLine();
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
         // Shows all links in chat
         /// <summary>
         /// Shows all links in chat
@@ -278,7 +287,7 @@ namespace Library.chatField
             }
             Console.WriteLine("\nPress Enter...");
             Console.ReadLine();
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
         // set what notification will reach user
         /// <summary>
         /// Sets notifcation preferences for this chat. 
@@ -299,23 +308,22 @@ namespace Library.chatField
 
             NotificationSetting = choice switch
             {
-                "1" => "Only special chats",
-                "2" => "All chats",
-                "3" => "Only mentions",
-                "4" => "No notification",
+                "1" => NotificationSettingTypes.AllChats,
+                "2" => NotificationSettingTypes.OnlyMentions,
+                "3" => NotificationSettingTypes.NoNotifications,
                 _ => NotificationSetting
             };
 
             Console.WriteLine($"[Updated] Notifications set to: {NotificationSetting}");
             Console.WriteLine("Press Enter...");
             Console.ReadLine();
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
 
         protected void ToggleReadReceipts()
         {
             ReadReceiptsEnabled = !ReadReceiptsEnabled;
             Console.WriteLine($"[Updated] Read receipts: {(ReadReceiptsEnabled ? "Enabled" : "Disabled")}");
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
         /// <summary>
         /// Displays current cuurent receipts for which user saw until which chat
         /// </summary>
@@ -333,7 +341,7 @@ namespace Library.chatField
                 var msgPreview = kv.Value != null ? kv.Value.Content.Substring(0, Math.Min(30, kv.Value.Content.Length)) + "..." : "None";
                 Console.WriteLine($" - {kv.Key.DisplayName}: {msgPreview} (at {kv.Value?.SentAt})");
             }
-        }
+        }//---------------------------------------------------------------------------------------service and do it diffrent
 
 
 

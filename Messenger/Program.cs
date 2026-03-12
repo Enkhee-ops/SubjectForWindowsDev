@@ -15,7 +15,7 @@ using Messenger.user;
 using Messenger.user.MessengerUser;
 using System;
 using System.Linq;
-using static Library.chatField.Chat;
+using static Library.chatField.Chatfeild;
 
 namespace Messenger
 {
@@ -43,7 +43,7 @@ namespace Messenger
             User currentUser = null;
             ScreenState currentScreen = ScreenState.LoginRegister;
             bool running = true;
-            Chat activeChat = null;
+            Chatfeild activeChat = null;
 
             while (running)
             {
@@ -95,7 +95,7 @@ namespace Messenger
                             var bob = repo.GetByName("Bob") ?? auth.Register<MessengerUser>("Bob", 28, "+97688112244", "bob456");
 
                             // Test group chat creation
-                            var group = new Library.chatFeild.GroupChat(currentUser, "Test Group Chat", new InMemoryUserRepository());
+                            var group = new Library.chatField.GroupChat(currentUser, "Test Group Chat", new InMemoryUserRepository());
                             group.AddMember(currentUser, alice);
                             group.AddMember(currentUser, bob);
                             mainService.AddChat(group);
@@ -166,10 +166,10 @@ namespace Messenger
                     else if (input == "n")
                     {
                         // Open or create self-chat (notes)
-                        var selfChat = chats.FirstOrDefault(c => c is Library.chatFeild.SelfChat && c.Participants.Count == 1);
+                        var selfChat = chats.FirstOrDefault(c => c is Library.chatField.SelfChat && c.Participants.Count == 1);
                         if (selfChat == null)
                         {
-                            selfChat = new Library.chatFeild.SelfChat(currentUser, new InMemoryUserRepository());
+                            selfChat = new Library.chatField.SelfChat(currentUser, new InMemoryUserRepository());
                             mainService.AddChat(selfChat);
                         }
                         activeChat = selfChat;

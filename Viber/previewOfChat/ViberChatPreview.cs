@@ -14,7 +14,7 @@ namespace Viber.previewOfChat
     {    /// <summary>
          ///generate preview of chat
          /// <summary
-        public string GeneratePreview(Chat chat)
+        public string GeneratePreview(Chatfeild chat)
         {
             var p = chat.Participants.FirstOrDefault();
             if (p == null) return "Empty chat";
@@ -27,7 +27,7 @@ namespace Viber.previewOfChat
                 : $"{p.DisplayName} ({phone}): {last}";
         }
 
-        public string GenerateAlternatePreview(Chat chat)
+        public string GenerateAlternatePreview(Chatfeild chat)
         {
             var p = chat.Participants.FirstOrDefault();
             if (p == null) return "Empty chat";

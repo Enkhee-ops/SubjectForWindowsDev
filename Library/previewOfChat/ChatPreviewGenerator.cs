@@ -10,7 +10,7 @@ namespace Library.previewOfChat
 {
     public interface ChatPreviewGenerator
     {
-        string GeneratePreview(Chat chat);
-        string GenerateAlternatePreview(Chat chat);
+        string GeneratePreview(Chatfeild chat);
+        string GenerateAlternatePreview(Chatfeild chat);
     }
 }

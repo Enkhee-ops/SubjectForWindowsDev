@@ -13,7 +13,7 @@ namespace Messenger.previewOfChat
     {/// <summary>
 ///preview of chat with lastmessagepreview
 /// <summary>
-        public string GeneratePreview(Chat chat)
+        public string GeneratePreview(Chatfeild chat)
         {
             var p = chat.Participants.Count > 0 ? chat.Participants[0] : null;
             if (p == null) return "Empty chat";
@@ -22,7 +22,7 @@ namespace Messenger.previewOfChat
         /// <summary>
         ///preview of chat without lastmessagepreview
         /// <summary>
-        public string GenerateAlternatePreview(Chat chat)
+        public string GenerateAlternatePreview(Chatfeild chat)
         {
             var p = chat.Participants.Count > 0 ? chat.Participants[0] : null;
             if (p == null) return "Empty chat";

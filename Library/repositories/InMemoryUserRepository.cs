@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections.Generic;
-using System.Linq;
+﻿
+
 using Library.user;
+using Library.message;
+using System.ComponentModel;
 
 namespace Library.repositories
 {/// <summary>
@@ -15,11 +12,85 @@ namespace Library.repositories
     {/// <summary>
      /// dictionary userID,userOBJ
      /// <summary>
-        private readonly Dictionary<string, User> _usersById = new();
+        private Dictionary<string, User> _usersById = new();
         /// <summary>
         /// dictionary userNAME,userOBJ
         /// <summary>
-        private readonly Dictionary<string, User> _usersByName = new();
+        private Dictionary<string, User> _usersByName = new();
+
+        private static short CurentChatId = 1;
+
+        // Core identification
+        /// <summary>
+        /// Unique identifier of this chat
+        /// </summary>
+        private string ChatId { get; } = Convert.ToString(CurentChatId);
+
+
+        /// <summary>
+        /// Returns the ID of the current chat .
+        /// </summary>
+        public string GetChatId()
+        {
+            CurentChatId++;
+            return ChatId;
+        }
+
+
+
+
+
+        /// <summary>
+        /// Users currently in this conversation
+        /// </summary>
+        private List<User> Participants { get; } = new List<User>();
+
+        /// <summary>
+        /// Returns the list of participants in the current chat.
+        /// </summary>
+        /// <returns></returns>
+        public List<User> GetParticipants()
+        {
+            return Participants;
+        }
+
+        /// <summary>
+        /// All messages in chronological order
+        /// </summary>
+        private List<Message> Messages { get; } = new List<Message>();
+
+        private List<Message> MediaMessages { get; } = new List<Message>();
+
+        private List<Message> FileMessages { get; } = new List<Message>();
+
+
+        private List<Message> TextMessages { get; } = new List<Message>();
+
+        /// <summary>
+        /// Messages pinned to the top of the chat
+        /// </summary>
+        private List<Message> PinnedMessages { get; } = new List<Message>();
+
+        /// <summary>
+        /// Display name / title of the chat
+        /// </summary>
+        private string Title { get; set; }
+
+        // Read & notification features
+        /// <summary>
+        /// Last message each participant has seen
+        /// </summary>
+        private Dictionary<User, Message> ReadReceipts { get; set; } = new Dictionary<User, Message>();
+
+        /// <summary>
+        /// Whether read receipts are enabled in this chat
+        /// </summary>
+
+        private bool Settings=false ;  
+
+
+
+
         /// <summary>
         /// method fo adding user to the repo
         /// <summary>
@@ -47,5 +118,7 @@ namespace Library.repositories
         ///get user list
         /// <summary>
         public IReadOnlyList<User> GetAll() => _usersById.Values.ToList().AsReadOnly();
+
+        
     }
 }

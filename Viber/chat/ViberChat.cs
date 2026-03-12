@@ -6,7 +6,7 @@ namespace Viber.chat
 {/// <summary>
 ///abstract class for viber
 /// <summary>
-    public abstract class ViberChat : Chat
+    public abstract class ViberChat : Chatfeild
     {/// <summary>
 ///constractor for user of messenger
 /// <summary>

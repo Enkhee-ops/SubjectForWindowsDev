@@ -7,11 +7,11 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Library.chatFeild
+namespace Library.chatField
 {        /// <summary>
          /// Groupchat class, inherits from Chat, has an Admin, and allows adding/removing members by the Admin. It also has a custom menu with group-specific options.
          /// </summary>
-    public class GroupChat : Chat
+    public class GroupChat : Chatfeild
     {        /// <summary>
              /// admin of the group chat, who has special permissions to manage members. The admin is set at creation and cannot be changed.
              /// </summary>
@@ -47,7 +47,7 @@ namespace Library.chatFeild
             if (admin == Admin && Participants.Contains(member))
             {
                 Participants.Remove(member);
-                ReadReceipts.Remove(member);
+                
                 Console.WriteLine($"[Event] {member.DisplayName} removed by admin");
             }
             else
@@ -56,16 +56,11 @@ namespace Library.chatFeild
             }
         }
 
-        public override string GetLastMessagePreview()
-        {
-            if (Messages.Count == 0) return "No messages yet";
-            var last = Messages[^1];
-            return $"{last.Sender.DisplayName}: {last.Content.Substring(0, Math.Min(20, last.Content.Length)) + "..."}";
-        }
+
         /// <summary>
         /// shows menu of group chat.
         /// </summary>
-        public override void ShowMenu(User currentUser)
+        public override void ShowMenu(User currentUser)//---------------------------------------------------------------------------------------service and do it diffrent
         {
             while (true)
             {

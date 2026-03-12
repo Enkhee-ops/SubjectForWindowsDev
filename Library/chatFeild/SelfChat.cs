@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.chatFeild
+namespace Library.chatField
 {/// <summary>
  /// class for mynote,selfchat.
  /// <summary>
-    public class SelfChat : Chat
+    public class SelfChat : Chatfeild
     {/// <summary>
      /// constractor for mynote/selfchat
      /// <summary>
@@ -22,12 +22,7 @@ namespace Library.chatFeild
         /// <summary>
         /// method for getting preview of last message of chat
         /// <summary>
-        public override string GetLastMessagePreview()
-        {
-            if (Messages.Count == 0) return "No messages/notes yet";
-            var last = Messages[^1].Content;
-            return last.Length > 20 ? last.Substring(0, 17) + "..." : last;
-        }
+
     }
 
 }
